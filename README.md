@@ -1,4 +1,4 @@
-# OLX Ads Monitoring Telegram Bot\ OLX_Scrapper_To_telegram_bot
+# OLX Ads Monitoring Telegram Bot
 
 A Python-based Telegram bot that automatically monitors free ads on OLX and sends them to a Telegram channel.
 
