@@ -84,6 +84,8 @@ Category: #sportandhobby
 
 If you'd like to contribute to this project, feel free to submit a pull request or open an issue.
 
+# Attention: This project was created for personal use for educational purposes (searching for a free refrigerator))))
+
 ### 📄 License
 
 This project is licensed under the MIT License.
