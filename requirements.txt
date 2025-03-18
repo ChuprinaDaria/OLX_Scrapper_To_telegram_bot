@@ -1,0 +1,3 @@
+telebot==4.0.0
+drission==1.0.0
+python-dotenv==0.20.0
