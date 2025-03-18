@@ -15,18 +15,19 @@ A Python-based Telegram bot that automatically monitors free ads on OLX and send
 ## 💻 How to Use
 
 ### 1. Clone the Repository
-Clone the repository to your local machine:
+### Clone the repository to your local machine:
+
 ```bash
 git clone https://github.com/ChuprinaDaria/OLX_Scrapper_To_telegram_bot.git
 cd OLX_Scrapper_To_telegram_bot
 
-2. Install Dependencies
-Install the necessary Python packages:
+### 2. Install Dependencies
+### Install the necessary Python packages:
 
 pip install -r requirements.txt
 
-3. Create and Configure .env File
-The bot relies on several environment variables to function properly. Create a .env file in the root of the project and add the following variables:
+### 3. Create and Configure .env File
+### The bot relies on several environment variables to function properly. Create a .env file in the root of the project and add the following variables:
 
 TELEGRAM_TOKEN=your-telegram-bot-token
 CHAT_IDS=123456789,987654321
@@ -39,12 +40,14 @@ OLX_URLS: A list of URLs from OLX that you want to monitor.
 CHECK_INTERVAL: How often (in seconds) the bot will check for new ads. The default is 180 seconds.
 
 
-4. Run the Bot
-After configuring the environment variables, you can run the bot:
-python bot.py
-The bot will start checking for new ads and send them to the specified Telegram channels.
+### 4. Run the Bot
+### After configuring the environment variables, you can run the bot:
 
-🛠️ Configuration
+python bot.py
+
+### The bot will start checking for new ads and send them to the specified Telegram channels.
+
+### 🛠️ Configuration
 You can configure:
 
 The list of OLX URLs to monitor by updating OLX_URLS.
