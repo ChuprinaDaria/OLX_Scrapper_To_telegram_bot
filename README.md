@@ -1,5 +1,5 @@
 # OLX Ads Monitoring Telegram Bot
-![OLX](demo.png)
+![OLX](photo_2025-05-30_09-20-37.jpg)
 
 A Python-based Telegram bot that automatically monitors free ads on OLX and sends the freshest ads to specified Telegram chats. 
 
