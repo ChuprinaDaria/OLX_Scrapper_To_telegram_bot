@@ -1,19 +1,21 @@
 # OLX Ads Monitoring Telegram Bot
+![OLX](demo.png)
 
 A Python-based Telegram bot that automatically monitors free ads on OLX and sends the freshest ads to specified Telegram chats. 
 
 ## 🚀 Features
 
 📡 Monitors new listings on OLX and OTOMOTO in real time, only sending the freshest ads
-📤 Automatically posts listings to Telegram chats, with or without images, using Markdown formatting
-🛠️ Built-in admin panel directly in Telegram — add, view, or delete tracked URLs without touching the code
-⚙️ Configured via a .env file — store your bot token, chat IDs, and other settings safely
-🚀 Uses DrissionPage for fast, stealthy scraping without full Selenium overhead
-🔁 Supports parallel checking of multiple URLs for better performance
-🧠 Smart interval handling — checks more frequently if new ads are found
-💾 SQLite database with deduplication, expiry tracking, and auto-cleanup
-👥 Supports multiple Telegram chat IDs
-🔐 Admin-only access to bot commands and management features
+- 📡 **Real-time monitoring** of new listings on OLX and OTOMOTO — only the freshest ads are processed
+- 📤 **Auto-posting to Telegram chats**, with or without images, using clean Markdown formatting
+- 🛠️ **Admin panel built into Telegram** — manage monitored URLs directly from chat (add / list / delete)
+- ⚙️ **Easy configuration via `.env` file** — keep tokens, IDs, and file paths clean and secure
+- 🚀 **Powered by DrissionPage** — fast, stealthy scraping without the weight of Selenium
+- 🔁 **Parallel URL checking** for high performance with minimal delays
+- 🧠 **Smart interval handling** — rechecks sooner when new ads are detected
+- 💾 **Persistent storage via SQLite**, with deduplication and automatic cleanup of expired ads
+- 👥 **Supports multiple Telegram chat IDs** for broad distribution
+- 🔐 **Admin-only control** for managing bot behavior and database access
 - Uses the [DrissionPage](https://github.com/michiya/DrissionPage) library for parsing OLX pages.
 
 
