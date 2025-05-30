@@ -1,16 +1,21 @@
 # OLX Ads Monitoring Telegram Bot
 
-A Python-based Telegram bot that automatically monitors free ads on OLX and sends them to a Telegram channel.
+A Python-based Telegram bot that automatically monitors free ads on OLX and sends the freshest ads to specified Telegram chats. 
 
 ## 🚀 Features
 
-- Monitors new listings on OLX based on specified criteria.
-- Automatically posts listings to a Telegram channel.
-- Supports configuration via an `.env` file for API keys and other settings.
+📡 Monitors new listings on OLX and OTOMOTO in real time, only sending the freshest ads
+📤 Automatically posts listings to Telegram chats, with or without images, using Markdown formatting
+🛠️ Built-in admin panel directly in Telegram — add, view, or delete tracked URLs without touching the code
+⚙️ Configured via a .env file — store your bot token, chat IDs, and other settings safely
+🚀 Uses DrissionPage for fast, stealthy scraping without full Selenium overhead
+🔁 Supports parallel checking of multiple URLs for better performance
+🧠 Smart interval handling — checks more frequently if new ads are found
+💾 SQLite database with deduplication, expiry tracking, and auto-cleanup
+👥 Supports multiple Telegram chat IDs
+🔐 Admin-only access to bot commands and management features
 - Uses the [DrissionPage](https://github.com/michiya/DrissionPage) library for parsing OLX pages.
-- Customizable check intervals to suit your needs.
-- Supports multiple Telegram chat IDs.
-- Includes filtering and hashtagging for easy categorization of ads.
+
 
 ## 💻 How to Use
 
@@ -36,18 +41,20 @@ pip install -r requirements.txt
 The bot relies on several environment variables to function properly. Create a .env file in the root of the project and add the following variables:
 
 ```bash
-TELEGRAM_TOKEN=your-telegram-bot-token
-CHAT_IDS=123456789,987654321
-OLX_URLS=https://www.olx.pl/your-page,https://www.olx.pl/another-page
-CHECK_INTERVAL=180
+TELEGRAM_TOKEN=
+CHAT_IDS=-1000000000,-1001000000
+ADMIN_IDS=0000000,000000
+DB_FILE=olx_ads.db
+URLS_FILE=tracked_urls.json
+
 ```
 
 ### Example
 
 - `TELEGRAM_TOKEN`: Your Telegram bot token (get it from BotFather on Telegram).
 - `CHAT_IDS`: A comma-separated list of chat IDs where the bot will send ads (you can get the chat ID from @userinfobot).
-- `OLX_URLS`: A list of URLs from OLX that you want to monitor.
-- `CHECK_INTERVAL`: How often (in seconds) the bot will check for new ads. The default is 180 seconds.
+-  DB_FILE
+-  URLS_FILE=tracked_urls.json
 
 ### 4. Run the Bot
 
@@ -72,11 +79,9 @@ You can configure:
 Here is an example of how the bot sends an ad to your Telegram channel:
 
 ```
-Title: Free bicycle for sale
-Description: A used bicycle in good condition, free for pickup.
-Date: 10/03/2025
-Tags: #bicycle #free #pickup
-Category: #sportandhobby
+📌 oddam za darmo skrzynie ze sklejki palety CID628
+⏱️ 46.8 min ago
+📆 23 maja 2025
 🔗 View Ad
 ```
 
