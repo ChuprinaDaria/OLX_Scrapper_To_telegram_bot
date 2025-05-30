@@ -70,7 +70,23 @@ The bot will start checking for new ads and send them to the specified Telegram 
 
 ### 🛠️ Configuration
 
-You can configure:
+The bot includes a set of optimized scanning parameters that you can tweak directly in the source code to suit your needs.
+Here’s what you can customize:
+# Scanning settings – optimized
+QUICK_CHECK_INTERVAL = 15      # Time (in seconds) between quick scans
+MIN_INTERVAL = 20              # Minimum wait time after a scan
+MAX_INTERVAL = 40              # Maximum wait time if nothing found
+MAX_AD_AGE_MINUTES = 50        # Only ads newer than this (in minutes) will be processed
+VERY_FRESH_AD_MINUTES = 10     # Ads fresher than this are marked "🔥 VERY FRESH"
+SKIP_FIRST_N_ADS = 2           # Skip first N promoted ads (usually sponsored)
+MAX_CARDS_TO_CHECK = 13        # How many listings to process per scan
+SCROLL_COUNT = 4               # Page scroll depth before parsing
+MAX_PARALLEL_URLS = 3          # Max URLs to scan in parallel
+PAGE_LOAD_TIMEOUT = 40         # Time (in seconds) to wait for full page load
+DETAILED_LOGGING = True        # Enable verbose logs for the first N cards
+CONSECUTIVE_OLD_COUNT = 3      # Stop parsing if this many old ads are found in a row
+EARLY_EXIT_ON_OLD = True       # Stop scan early if old listings are detected
+
 
 - The list of OLX URLs to monitor by updating `OLX_URLS`.
 - The hashtags for categories in the `CATEGORY_HASHTAGS` dictionary.
