@@ -1,122 +1,193 @@
-# OLX Ads Monitoring Telegram Bot
-![OLX](photo_2025-05-30_09-20-37.jpg)
+# 🔍 OLX Ads Monitoring Telegram Bot
 
-A Python-based Telegram bot that automatically monitors free ads on OLX and sends the freshest ads to specified Telegram chats. 
+<div align="center">
+  <img src="photo_2025-05-30_09-20-37.jpg" alt="OLX Bot Logo" width="200"/>
+  
+  **A Python-based Telegram bot that automatically monitors free ads on OLX and sends the freshest ads to specified Telegram chats.**
+  
+  [![Python](https://img.shields.io/badge/Python-3.7+-blue.svg)](https://www.python.org/)
+  [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+  [![Telegram](https://img.shields.io/badge/Telegram-Bot-blue.svg)](https://telegram.org/)
+</div>
 
-## 🚀 Features
+---
 
-📡 Monitors new listings on OLX and OTOMOTO in real time, only sending the freshest ads
-- 📡 **Real-time monitoring** of new listings on OLX and OTOMOTO — only the freshest ads are processed
-- 📤 **Auto-posting to Telegram chats**, with or without images, using clean Markdown formatting
-- 🛠️ **Admin panel built into Telegram** — manage monitored URLs directly from chat (add / list / delete)
-- ⚙️ **Easy configuration via `.env` file** — keep tokens, IDs, and file paths clean and secure
-- 🚀 **Powered by DrissionPage** — fast, stealthy scraping without the weight of Selenium
-- 🔁 **Parallel URL checking** for high performance with minimal delays
-- 🧠 **Smart interval handling** — rechecks sooner when new ads are detected
-- 💾 **Persistent storage via SQLite**, with deduplication and automatic cleanup of expired ads
-- 👥 **Supports multiple Telegram chat IDs** for broad distribution
-- 🔐 **Admin-only control** for managing bot behavior and database access
-- Uses the [DrissionPage](https://github.com/michiya/DrissionPage) library for parsing OLX pages.
+## ✨ Features
 
+| Feature | Description |
+|---------|-------------|
+| 📡 **Real-time Monitoring** | Monitors new listings on OLX and OTOMOTO in real-time, only sending the freshest ads |
+| 📤 **Auto-posting** | Automatically posts to Telegram chats with clean Markdown formatting and optional images |
+| 🛠️ **Admin Panel** | Built-in Telegram admin panel to manage monitored URLs (add/list/delete) |
+| ⚙️ **Easy Configuration** | Simple `.env` file configuration for tokens, IDs, and file paths |
+| 🚀 **High Performance** | Powered by DrissionPage for fast, stealthy scraping without Selenium overhead |
+| 🔁 **Parallel Processing** | Checks multiple URLs in parallel for optimal performance |
+| 🧠 **Smart Intervals** | Dynamically adjusts checking intervals based on new ad detection |
+| 💾 **Persistent Storage** | SQLite database with deduplication and automatic cleanup |
+| 👥 **Multi-chat Support** | Supports multiple Telegram chat IDs for broad distribution |
+| 🔐 **Admin Control** | Admin-only access for managing bot behavior and database |
 
-## 💻 How to Use
+---
+
+## 🚀 Quick Start
 
 ### 1. Clone the Repository
-
-Clone the repository to your local machine:
 
 ```bash
 git clone https://github.com/ChuprinaDaria/OLX_Scrapper_To_telegram_bot.git
 cd OLX_Scrapper_To_telegram_bot
-``` 
+```
 
-## 2. Install Dependencies
-
-Install the necessary Python packages:
+### 2. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Create and Configure .env File
+### 3. Configure Environment Variables
 
-The bot relies on several environment variables to function properly. Create a .env file in the root of the project and add the following variables:
+Create a `.env` file in the root directory:
 
-```bash
-TELEGRAM_TOKEN=
+```env
+# Telegram Configuration
+TELEGRAM_TOKEN=your_bot_token_here
 CHAT_IDS=-1000000000,-1001000000
-ADMIN_IDS=0000000,000000
+ADMIN_IDS=1234567890,0987654321
+
+# Database and Files
 DB_FILE=olx_ads.db
 URLS_FILE=tracked_urls.json
-
 ```
 
-### Example
-
-- `TELEGRAM_TOKEN`: Your Telegram bot token (get it from BotFather on Telegram).
-- `CHAT_IDS`: A comma-separated list of chat IDs where the bot will send ads (you can get the chat ID from @userinfobot).
--  DB_FILE
--  URLS_FILE=tracked_urls.json
+> **Getting Your Tokens:**
+> - `TELEGRAM_TOKEN`: Get from [@BotFather](https://t.me/botfather) on Telegram
+> - `CHAT_IDS`: Get chat IDs from [@userinfobot](https://t.me/userinfobot)
+> - `ADMIN_IDS`: Your Telegram user ID (also from [@userinfobot](https://t.me/userinfobot))
 
 ### 4. Run the Bot
-
-After configuring the environment variables, you can run the bot:
 
 ```bash
 python bot.py
 ```
 
-The bot will start checking for new ads and send them to the specified Telegram channels.
+🎉 **That's it!** The bot will start monitoring and sending fresh ads to your specified channels.
 
-### 🛠️ Configuration
+---
 
-The bot includes a set of optimized scanning parameters that you can tweak directly in the source code to suit your needs.
-Here’s what you can customize:
+## ⚙️ Configuration & Customization
 
-## ⚙️ Scanning Settings – Optimized
+### Scanning Parameters
 
-You can customize the bot’s scanning behavior by editing the constants at the top of `OLX.py`:
+Fine-tune the bot's behavior by editing these constants in `OLX.py`:
 
 ```python
-QUICK_CHECK_INTERVAL = 15      # Time (in seconds) between quick scans
-MIN_INTERVAL = 20              # Minimum wait time after a scan
+# Timing Configuration
+QUICK_CHECK_INTERVAL = 15      # Seconds between quick scans
+MIN_INTERVAL = 20              # Minimum wait time after scan
 MAX_INTERVAL = 40              # Maximum wait time if nothing found
 
-MAX_AD_AGE_MINUTES = 50        # Only ads newer than this (in minutes) will be processed
-VERY_FRESH_AD_MINUTES = 10     # Ads fresher than this are marked "🔥 VERY FRESH"
+# Ad Filtering
+MAX_AD_AGE_MINUTES = 50        # Only process ads newer than this
+VERY_FRESH_AD_MINUTES = 10     # Mark ads as "🔥 VERY FRESH"
 
-SKIP_FIRST_N_ADS = 2           # Skip first N promoted ads (usually sponsored)
-MAX_CARDS_TO_CHECK = 13        # How many listings to process per scan
-SCROLL_COUNT = 4               # Page scroll depth before parsing
+# Parsing Settings
+SKIP_FIRST_N_ADS = 2           # Skip promoted/sponsored ads
+MAX_CARDS_TO_CHECK = 13        # Listings to process per scan
+SCROLL_COUNT = 4               # Page scroll depth
 
-MAX_PARALLEL_URLS = 3          # Max URLs to scan in parallel
-PAGE_LOAD_TIMEOUT = 40         # Time (in seconds) to wait for full page load
+# Performance
+MAX_PARALLEL_URLS = 3          # Concurrent URL scanning
+PAGE_LOAD_TIMEOUT = 40         # Page load wait time (seconds)
 
-DETAILED_LOGGING = True        # Enable verbose logs for the first N cards
-CONSECUTIVE_OLD_COUNT = 3      # Stop parsing if this many old ads are found in a row
-EARLY_EXIT_ON_OLD = True       # Stop scan early if old listings are detected
+# Optimization
+CONSECUTIVE_OLD_COUNT = 3      # Stop if N old ads found in row
+EARLY_EXIT_ON_OLD = True       # Enable early exit optimization
+DETAILED_LOGGING = True        # Verbose logging for debugging
+```
 
-To adjust behavior (like scanning frequency or ad freshness limits), simply update these constants at the top of the BOT file.
+---
 
-No environment variables are needed for these — just change the values and restart the bot 🚀
+## 📱 Admin Commands
 
-### 💬 Example Output
+Use these commands in Telegram to manage your bot:
 
-Here is an example of how the bot sends an ad to your Telegram channel:
+| Command | Description |
+|---------|-------------|
+| `/add_url <URL>` | Add a new OLX/OTOMOTO URL to monitor |
+| `/list_urls` | Show all currently monitored URLs |
+| `/delete_url <index>` | Remove a URL from monitoring |
+| `/stats` | Show bot statistics and database info |
+
+---
+
+## 📋 Example Output
+
+Here's how ads appear in your Telegram chat:
 
 ```
 📌 oddam za darmo skrzynie ze sklejki palety CID628
-⏱️ 46.8 min ago
+⏱️ 46.8 min ago | 🔥 VERY FRESH
 📆 23 maja 2025
-🔗 View Ad
+💰 Free
+📍 Kraków, Małopolskie
+🔗 [View Ad](https://www.olx.pl/example-ad)
 ```
 
-### 🎯 Contribution
+---
 
-If you'd like to contribute to this project, feel free to submit a pull request or open an issue.
+## 🛠️ Tech Stack
 
-# Attention: This project was created for personal use for educational purposes (searching for a free refrigerator))))
+- **Python 3.7+** - Core language
+- **[DrissionPage](https://github.com/michiya/DrissionPage)** - Web scraping without Selenium
+- **SQLite** - Local database for ad storage
+- **python-telegram-bot** - Telegram API wrapper
+- **asyncio** - Asynchronous processing
 
-### 📄 License
+---
 
-This project is licensed under the MIT License.
+## 📊 Performance
+
+- **Parallel Processing**: Monitors up to 3 URLs simultaneously
+- **Smart Caching**: Prevents duplicate ad notifications
+- **Optimized Scanning**: Early exit when old ads are detected
+- **Memory Efficient**: Automatic cleanup of expired ad data
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions! Here's how you can help:
+
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** your changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to the branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
+
+### Issues & Feature Requests
+
+- 🐛 **Bug reports**: [Create an issue](../../issues)
+- 💡 **Feature requests**: [Create an issue](../../issues)
+- 💬 **Questions**: [Discussions](../../discussions)
+
+---
+
+## ⚠️ Disclaimer
+
+> **Educational Purpose**: This project was created for personal use and educational purposes (originally for searching for a free refrigerator 😄). Please use responsibly and respect OLX's terms of service.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+  
+**Made with ❤️ for the community**
+
+If this project helped you, consider giving it a ⭐!
+
+</div>
